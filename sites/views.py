@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
+from django.http import HttpResponse
+
 
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+
+from RestAPIs import client
 
 
 from rest_framework.decorators import api_view
@@ -20,6 +24,11 @@ from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
 
 
+def clientApp(request):
+    resp = client.getRequest('https://httpbin.org/anything')
+    return HttpResponse(resp)
+
+
 @api_view(['GET'])
 def index(request):
     api_url = {
@@ -29,6 +38,7 @@ def index(request):
         'Update Todo Item': 'api/update-todo/<int:pk>/',
         'Delete Todo Item': 'api/delete-todo-item/<int:pk>/',
     }
+
     return Response(api_url)
 
 

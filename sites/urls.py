@@ -9,6 +9,7 @@ from . import views
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    path('', views.clientApp, name="client"),
     path('api-overview/', views.index, name="index"),
     path('api/todo-items/', views.todoList, name="todo-list"),
     path('api/create-todo-item/', views.createTodo, name="create-todo"),
