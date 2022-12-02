@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-
 from django.http import HttpResponse
 
 
@@ -9,8 +8,6 @@ from rest_framework import viewsets
 from rest_framework import permissions
 
 from RestAPIs import client
-
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 # from .serializers import UserSerializer, GroupSerializer
@@ -26,12 +23,14 @@ from pygments.styles import get_all_styles
 
 def clientApp(request):
     resp = client.getRequest('https://httpbin.org/anything')
+    print(request.body)
     return HttpResponse(resp)
 
 
 @api_view(['GET'])
 def index(request):
     api_url = {
+        'description': 'This is a list of all the urls that are available in the API',
         'todo-lists': 'api/todo-items/',
         'todo-item-details': 'api/todo-item/<int:pk>/',
         'Create Todo Item': 'api/create-todo-item/',
@@ -46,6 +45,8 @@ def index(request):
 def todoList(request):
     todos = Todo.objects.all()
     todose = TodoSerializer(todos, many=True)
+    print(todos)
+    print(todose.data)
     return Response(todose.data)
 
 
