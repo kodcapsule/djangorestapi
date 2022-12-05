@@ -9,6 +9,7 @@ from rest_framework import permissions
 
 from RestAPIs import client
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 # from .serializers import UserSerializer, GroupSerializer
 # Create your views here.
@@ -45,9 +46,16 @@ def index(request):
 def todoList(request):
     todos = Todo.objects.all()
     todose = TodoSerializer(todos, many=True)
-    print(todos)
-    print(todose.data)
+    # print(todos)
+    # print(todose.data)
     return Response(todose.data)
+
+
+# Class based views
+
+class TodoListView(ListAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
 
 
 @api_view(['GET'])
