@@ -14,7 +14,7 @@ urlpatterns = [
     path('api-overview/', views.TodoListView.as_view(), name="index"),
     path('api/todo-items/', views.todoList, name="todo-list"),
     path('api/create-todo-item/', views.createTodo, name="create-todo"),
-    path('api/update-todo/<int:pk>/',
+    path('api/create-todo/',
          views.CreateTodoItem.as_view(), name="update-todo"),
     # path('api/update-todo/<int:pk>/', views.updateTodo, name="update-todo"),
     path('api/delete-todo-item/<int:pk>/',

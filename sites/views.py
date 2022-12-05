@@ -80,8 +80,9 @@ class CreateTodoItem(ListCreateAPIView):
     serializer_class = TodoSerializer
 
     def perform_create(self, serializer):
-        todo = get_object_or_404(Todo, id=self.request.data.get('id'))
-        return serializer.save(todo=todo)
+        # todo = get_object_or_404(Todo, id=self.request.data.get('pk'))
+        # print(self.request.body)
+        return serializer.save()
 
 
 @api_view(['POST'])
