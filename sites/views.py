@@ -9,10 +9,12 @@ from rest_framework import permissions
 
 from RestAPIs import client
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView
 from rest_framework.response import Response
 # from .serializers import UserSerializer, GroupSerializer
 # Create your views here.
+
+from django.shortcuts import get_object_or_404
 
 from . serializers import SnippetsSerializer, TodoSerializer
 from . models import Todo
@@ -73,11 +75,19 @@ def createTodo(request):
     return Response(todoserilizer.data)
 
 
+class CreateTodoItem(ListCreateAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+
+    def perform_create(self, serializer):
+        todo = get_object_or_404(Todo, id=self.request.data.get('id'))
+        return serializer.save(todo=todo)
+
+
 @api_view(['POST'])
 def updateTodo(request, pk):
     todoitem = Todo.objects.get(id=pk)
     todoitemSerilizer = TodoSerializer(instance=todoitem, data=request.data)
-
     if todoitemSerilizer.is_valid():
         todoitemSerilizer.save()
     return Response(todoitemSerilizer.data)
