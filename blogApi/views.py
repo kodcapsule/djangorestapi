@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics, permissions
-
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication, BaseAuthentication
 
 from . models import Post
 from . serializers import PostSerializer
@@ -17,7 +17,7 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    # permission_classes = (permissions.IsAuthenticated,)
+    # authentication_classes = [SessionAuthentication, BaseAuthentication]
     permission_classes = [isAuthorOrReadOnly]
 
     queryset = Post.objects.all()
