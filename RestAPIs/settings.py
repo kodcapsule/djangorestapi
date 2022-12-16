@@ -32,14 +32,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Third party apps
     'rest_framework',
     'rest_framework.authtoken',
+    'dj_rest_auth',
+    'allauth',  # new
+    'allauth.account',  # new
+    'allauth.socialaccount',  # new
+    'dj_rest_auth.registration',
+
+    # default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # user apps
     'sites',
     'blogApi',
 ]
@@ -89,6 +98,10 @@ REST_FRAMEWORK = {
     ],
 
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # new
+SITE_ID = 1  # new
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
