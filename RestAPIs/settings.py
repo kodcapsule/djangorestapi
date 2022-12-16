@@ -78,9 +78,11 @@ WSGI_APPLICATION = 'RestAPIs.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    # Permission Classes
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # new
     ],
+    # Authentication Classes
     'DEFAULT_AUTHENTICATION_CLASSES': [  # new
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication'

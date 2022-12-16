@@ -17,7 +17,7 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    # authentication_classes = [SessionAuthentication, BaseAuthentication]
+    authentication_classes = [SessionAuthentication]
     permission_classes = [isAuthorOrReadOnly]
 
     queryset = Post.objects.all()
